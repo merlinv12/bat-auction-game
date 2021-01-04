@@ -48,7 +48,7 @@ export const QuizListing: React.FC<QuizListingProps> = ({
     setGuessSubmitted(false);
   }, [listing.id]);
 
-  const {title, price, date, listingLocation: {city, zip}, listingImages: {main}} = listing;
+  const {title, price, date, listingUrl, listingLocation: {city, zip}, listingImages: {main}} = listing;
 
   return (
     <QuizContainer>
@@ -69,7 +69,7 @@ export const QuizListing: React.FC<QuizListingProps> = ({
           <button>Summary</button>
         ) : (
           <div>
-            <p>Actual Price: ${price}</p>    
+            <p>Actual Price: ${price}, <a href={listingUrl} target="_blank" rel="noreferrer">Click here to see the listing</a></p>
             <button onClick={nextAuction}>Next</button>
           </div>
         )
