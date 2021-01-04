@@ -1,10 +1,30 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
+const RoundsHeader = styled.h3`
+  color: green;
+  min-width: 0;
+  min-height: auto;
+  flex: 0 1 auto;
+`
+
+const QuizContainer = styled.div`
+  width: 80vw;
+  min-width: 400px;
+  min-height: 800px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+`
+
+const ImageInfoContainer = styled.div`
+  max-width: 600px;
+`
 const ListingImage = styled.img`
-  object-fit: cover;
-  height: 400px;
-  width: 100%;
+  height: auto;
+  max-width: 100%;
 `;
 
 type QuizListingProps = {
@@ -21,26 +41,37 @@ export const QuizListing: React.FC<QuizListingProps> = ({
   const [guessValue, setGuessValue] = useState(0);
   const [guessSubmited, setGuessSubmitted] = useState(false);
 
+  // Resets the Guessing State when a new listing is loaded.
   useEffect(() => {
     console.log("Next Auction...");
     setGuessValue(0);
     setGuessSubmitted(false);
   }, [listing.id]);
 
+  const {title, price, date, listingLocation: {city, zip}, listingImages: {main}} = listing;
+
   return (
-    <div>
-      <h3>
-        Round: {rounds.current} / {rounds.total}{" "}
-      </h3>
-      <h2>{listing.title}</h2>
-      <ListingImage src={listing.listingImages.main} alt='main'></ListingImage>
-      <h4>Sold On: {listing.date}</h4>
-      <h4>Location: {listing.listingLocation.city}</h4>
+    <QuizContainer>
+      <RoundsHeader>
+        Round: {rounds.current + ' / ' + rounds.total}
+      </RoundsHeader>
+      <h2>{title}</h2>
+      <div>
+        <div><b>Sold On: {date}</b></div> 
+        <div><b>Location: {city}, {zip}</b></div>
+      </div>
+      <ImageInfoContainer>
+        <ListingImage src={main} alt='main'></ListingImage>
+      </ImageInfoContainer>
+
       {guessSubmited ? (
         rounds.current === rounds.total ? (
           <button>Summary</button>
         ) : (
-          <button onClick={nextAuction}>Next</button>
+          <div>
+            <p>Actual Price: ${price}</p>    
+            <button onClick={nextAuction}>Next</button>
+          </div>
         )
       ) : (
         <React.Fragment>
@@ -49,12 +80,12 @@ export const QuizListing: React.FC<QuizListingProps> = ({
             value={guessValue}
             placeholder='$0'
             required
-            min='0'
+            min='1'
             onChange={(e) => setGuessValue(parseInt(e.target.value))}
           ></input>
           <button onClick={() => setGuessSubmitted(true)}>Guess</button>
         </React.Fragment>
       )}
-    </div>
+    </QuizContainer>
   );
 };

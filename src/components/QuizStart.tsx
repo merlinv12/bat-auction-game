@@ -4,6 +4,7 @@ import { QuizMain } from "./QuizMain";
 
 const FullScreenContainer = styled.div`
   width: 100%;
+  height: auto;
   margin: 0;
   padding: 0;
 `;
@@ -11,16 +12,11 @@ const FullScreenContainer = styled.div`
 const FlexContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
   align-items: center;
-  align-content: center;
 `;
+
 // Define optional props
-export const FlexRow = styled.div<{ order?: number }>`
-  min-width: 0;
-  min-height: auto;
-  flex: 0 1 auto;
-  align-self: center;
+const FlexRow = styled.div<{ order?: number }>`
   order: ${(props) => props.order || 0};
 `;
 
@@ -45,9 +41,7 @@ const StartQuiz: React.FC = () => {
           </FlexRow>
         </FlexContainer>
       ) : (
-        <FlexContainer>
           <QuizMain />
-        </FlexContainer>
       )}
     </FullScreenContainer>
   );
