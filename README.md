@@ -1,4 +1,23 @@
-# Getting Started with Create React App
+# BaT Auction Guessing Game
+
+## Todo List for MVP
+- [x] Start Quiz page
+  - [x] Brief Description
+  - [ ] (optional) select Number of items
+- [ ] Quiz page features
+  - [x] Round Number / Rounds Total
+  - [x] Title of Auction / Car
+  - [x] Sold On Date
+  - [x] Picture
+  - [ ] Carosel of pictures
+  - [x] Input box with submit button
+  - [ ] Actual Price after submit
+    - [ ] (optional) counter animation
+  - [ ] Under / Over budget number
+  - [ ] Running Total? or Score?
+  - [ ] Link to listing
+- [ ] Summary Page 
+  - [ ] List of all auctions
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
