@@ -6,7 +6,7 @@ const RoundsHeader = styled.h3`
   min-width: 0;
   min-height: auto;
   flex: 0 1 auto;
-`
+`;
 
 const QuizContainer = styled.div`
   width: 80vw;
@@ -17,11 +17,11 @@ const QuizContainer = styled.div`
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-`
+`;
 
 const ImageInfoContainer = styled.div`
   max-width: 600px;
-`
+`;
 const ListingImage = styled.img`
   height: auto;
   max-width: 100%;
@@ -35,44 +35,63 @@ type QuizListingProps = {
 
 export const QuizListing: React.FC<QuizListingProps> = ({
   listing,
-  rounds,
   nextAuction,
+  rounds,
 }) => {
-  const [guessValue, setGuessValue] = useState(0);
   const [guessSubmited, setGuessSubmitted] = useState(false);
+  const [guessValue, setGuessValue] = useState(0);
+  
+  const {
+    date,
+    id,
+    listingImages: { main },
+    listingLocation: { city, zip },
+    listingUrl,
+    price,
+    title,
+  } = listing;
 
   // Resets the Guessing State when a new listing is loaded.
   useEffect(() => {
     console.log("Next Auction...");
     setGuessValue(0);
     setGuessSubmitted(false);
-  }, [listing.id]);
-
-  const {title, price, date, listingUrl, listingLocation: {city, zip}, listingImages: {main}} = listing;
+  }, [id]);
 
   return (
     <QuizContainer>
       <RoundsHeader>
-        Round: {rounds.current + ' / ' + rounds.total}
+        {`Round: ${rounds.current} / ${rounds.total}`}
       </RoundsHeader>
       <h2>{title}</h2>
       <div>
-        <div><b>Sold On: {date}</b></div> 
-        <div><b>Location: {city}, {zip}</b></div>
+        <div>
+          <b>{`Sold On: ${date}`}</b>
+        </div>
+        <div>
+          <b>
+            {`Location: ${city}, ${zip}`}
+          </b>
+        </div>
       </div>
       <ImageInfoContainer>
         <ListingImage src={main} alt='main'></ListingImage>
       </ImageInfoContainer>
 
       {guessSubmited ? (
-        rounds.current === rounds.total ? (
-          <button>Summary</button>
-        ) : (
-          <div>
-            <p>Actual Price: ${price}, <a href={listingUrl} target="_blank" rel="noreferrer">Click here to see the listing</a></p>
+        <div>
+          <p>
+            Actual Price: ${price},{" "}
+            <a href={listingUrl} target='_blank' rel='noreferrer'>
+              Click here to see the listing
+            </a>
+          </p>
+          {rounds.current === rounds.total ? (
+            <button>Summary</button>
+          ) : (
             <button onClick={nextAuction}>Next</button>
-          </div>
-        )
+          )}
+        </div>
       ) : (
         <React.Fragment>
           <input
@@ -82,7 +101,7 @@ export const QuizListing: React.FC<QuizListingProps> = ({
             required
             min='1'
             onChange={(e) => setGuessValue(parseInt(e.target.value))}
-          ></input>
+          />
           <button onClick={() => setGuessSubmitted(true)}>Guess</button>
         </React.Fragment>
       )}
