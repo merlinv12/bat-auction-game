@@ -22,6 +22,7 @@ const FlexRow = styled.div<{ order?: number }>`
 
 const StartQuiz: React.FC = () => {
   const [gameStarted, setGameStarted] = useState(false);
+  const [quizLength, setQuizLength] = useState(3);
 
   return (
     <FullScreenContainer>
@@ -37,11 +38,22 @@ const StartQuiz: React.FC = () => {
             </p>
           </FlexRow>
           <FlexRow>
+            <span>
+              Number of Listings:
+              <input
+                type='number'
+                value={quizLength}
+                required
+                min='1'
+                max='10'
+                onChange={(e) => setQuizLength(parseInt(e.target.value))}
+              />
+            </span>
             <button onClick={() => setGameStarted(true)}>Start</button>
           </FlexRow>
         </FlexContainer>
       ) : (
-          <QuizMain />
+          <QuizMain quizLength={quizLength} />
       )}
     </FullScreenContainer>
   );

@@ -31,12 +31,14 @@ type QuizListingProps = {
   listing: Listing;
   rounds: Rounds;
   nextAuction: () => void;
+  showSummary: () => void;
 };
 
 export const QuizListing: React.FC<QuizListingProps> = ({
   listing,
   nextAuction,
   rounds,
+  showSummary,
 }) => {
   const [guessSubmited, setGuessSubmitted] = useState(false);
   const [guessValue, setGuessValue] = useState(0);
@@ -87,7 +89,7 @@ export const QuizListing: React.FC<QuizListingProps> = ({
             </a>
           </p>
           {rounds.current === rounds.total ? (
-            <button>Summary</button>
+            <button onClick={showSummary}>Summary</button>
           ) : (
             <button onClick={nextAuction}>Next</button>
           )}
