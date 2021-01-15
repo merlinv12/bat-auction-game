@@ -16,7 +16,8 @@ export const QuizMain: React.FC<QuizMainProps> = ({ quizLength }) => {
 
   useEffect(() => {
     getQuizListings(quizLength);
-  }, [quizLength]);
+    // eslint-disable-next-line
+  }, []);
 
   // Promise .then
   // const getQuizListings = (): void => {
@@ -28,20 +29,19 @@ export const QuizMain: React.FC<QuizMainProps> = ({ quizLength }) => {
   //         setLoading(false);
   //       }
   //     })
-  //     .catch((err: Error) => console.log(err));
+  //     .catch((err: string ) => console.log(err));
   // };
 
   // Async Await
-  const getQuizListings = async (limit: number): Promise<void> => {
+  const getQuizListings = async (limit: number) => {
     setLoading(true);
     try {
       const response: AxiosResponse<Listing[]> = await getListings(limit);
       const auctionListings: Listing[] = response.data;
       auctionListings.length > 0 && setListings(auctionListings);
       setLoading(false);
-    } catch (err: any) {
+    } catch (err) {
       console.log(err);
-      setLoading(false);
     }
   };
 
@@ -58,7 +58,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({ quizLength }) => {
     <div>
       {!loading ? (
         displaySummary ? (
-          <QuizSummary listings={listings} />
+           <QuizSummary listings={listings} />
         ) : (
           <QuizListing
             listing={listings[activeListingIdx]}

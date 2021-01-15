@@ -77,7 +77,7 @@ export const QuizListing: React.FC<QuizListingProps> = ({
         </div>
       </div>
       <ImageInfoContainer>
-        <ListingImage src={main} alt='main'></ListingImage>
+        <ListingImage src={main + '?w=620'} alt='main'></ListingImage>
       </ImageInfoContainer>
 
       {guessSubmited ? (
