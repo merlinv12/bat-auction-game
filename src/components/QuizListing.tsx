@@ -14,6 +14,7 @@ const QuizContainer = styled.div`
   min-height: 800px;
   display: flex;
   flex-flow: column nowrap;
+  box-shadow: 0 0 0 1px rgb(0 0 0/.05), 0 4px 16px rgb(0 0 0/.1);
   align-items: center;
   margin-left: auto;
   margin-right: auto;

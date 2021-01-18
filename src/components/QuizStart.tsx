@@ -7,12 +7,19 @@ const FullScreenContainer = styled.div`
   height: auto;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
 `;
 
 const FlexContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  box-shadow: 0 0 0 1px rgb(0 0 0/.05), 0 4px 16px rgb(0 0 0/.1);
+  border-radius: 24px;
+  padding: 20px;
+  width: 600px;
+  flex: 0 1 auto;
 `;
 
 // Define optional props
@@ -26,8 +33,6 @@ const StartQuiz: React.FC = () => {
 
   return (
     <FullScreenContainer>
-      {/* HTML attributes including inline CSS style properties are defined in react types index file*/}
-      <h1 style={{ textAlign: "center" }}>Bring A Trailer Auction Quiz</h1>
       {!gameStarted ? (
         <FlexContainer>
           <FlexRow>
