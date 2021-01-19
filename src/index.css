@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Biryani';
+    src: local('Biryani-Regular'), url(./assets/Biryani-Regular.ttf) format('ttf');
+  }
+
+body, html { 
+    font-family: 'Biryani', sans-serif;
+}  
