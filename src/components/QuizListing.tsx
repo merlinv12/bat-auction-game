@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { ListingImages } from './ListingImages'
 
 const RoundsHeader = styled.h3`
   color: green;
@@ -25,13 +26,6 @@ const ListingContainer = styled.div`
   padding: 30px;
 `;
 
-const ImageInfoContainer = styled.div`
-  max-width: 600px;
-`;
-const ListingImage = styled.img`
-  height: auto;
-  max-width: 100%;
-`;
 
 type QuizListingProps = {
   listing: Listing;
@@ -51,7 +45,7 @@ export const QuizListing: React.FC<QuizListingProps> = ({
   const {
     date,
     _id,
-    images: { main },
+    images: { main, extra },
     location: { city, zip },
     listingUrl,
     price,
@@ -64,6 +58,8 @@ export const QuizListing: React.FC<QuizListingProps> = ({
     setGuessValue(0);
     setGuessSubmitted(false);
   }, [_id]);
+
+  let images = [main, ...extra]
 
   return (
     <QuizContainer>
@@ -82,9 +78,7 @@ export const QuizListing: React.FC<QuizListingProps> = ({
             </b>
           </div>
         </div>
-        <ImageInfoContainer>
-          <ListingImage src={main + '?w=620'} alt='main'></ListingImage>
-        </ImageInfoContainer>
+        <ListingImages images={images} />
 
         {guessSubmited ? (
           <div>

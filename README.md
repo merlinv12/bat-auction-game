@@ -9,7 +9,7 @@
   - [x] Title of Auction / Car
   - [x] Sold On Date
   - [x] Picture
-  - [ ] Carosel of pictures
+  - [x] Carosel of pictures
   - [x] Input box with submit button
   - [x] Actual Price after submit
     - [ ] (optional) counter animation

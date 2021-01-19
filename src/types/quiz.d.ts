@@ -16,7 +16,8 @@ interface Listing {
 
 interface ListingLocation {
     city: string;
-    zip: number;
+    state: string;
+    zip: string;
 }
 
 interface ListingImages {

@@ -27,6 +27,17 @@ const FlexRow = styled.div<{ order?: number }>`
   order: ${(props) => props.order || 0};
 `;
 
+const StartButton = styled.button`
+  background-color: #111;
+  color: white;
+  height: 36px;
+  padding: 0 20px;
+  border-radius: 18px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+
+`
 const StartQuiz: React.FC = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [quizLength, setQuizLength] = useState(3);
@@ -54,8 +65,8 @@ const StartQuiz: React.FC = () => {
                 onChange={(e) => setQuizLength(parseInt(e.target.value))}
               />
             </span>
-            <button onClick={() => setGameStarted(true)}>Start</button>
           </FlexRow>
+          <StartButton onClick={() => setGameStarted(true)}>Start</StartButton>
         </FlexContainer>
       ) : (
           <QuizMain quizLength={quizLength} />
