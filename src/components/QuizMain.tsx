@@ -37,8 +37,9 @@ export const QuizMain: React.FC<QuizMainProps> = ({ quizLength }) => {
     setLoading(true);
     try {
       const response: AxiosResponse<Listing[]> = await getListings(limit);
-      const auctionListings: Listing[] = response.data;
+      const auctionListings: Listing[] = response.data
       auctionListings.length > 0 && setListings(auctionListings);
+      console.log(auctionListings)
       setLoading(false);
     } catch (err) {
       console.log(err);

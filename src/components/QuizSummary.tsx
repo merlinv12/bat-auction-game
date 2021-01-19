@@ -7,7 +7,7 @@ type QuizSummaryProps = {
 export const QuizSummary: React.FC<QuizSummaryProps> = ({ listings }) => {
     return (
         <div>
-            {listings.map(listing => <QuizSummaryItem key={listing.id} listing={listing} />)}
+            {listings.map(listing => <QuizSummaryItem key={listing._id} listing={listing} />)}
         </div>
     )
 } 

@@ -6,10 +6,11 @@ interface Listing {
     title: string;
     price: number;
     date: string;
-    listingImages: ListingImages;
-    listingLocation: ListingLocation;
+    images: ListingImages;
+    location: ListingLocation;
     additionalInfo: string[];
-    id: number;
+    _id: string;
+    order: number;
     listingUrl: string;
 }
 
