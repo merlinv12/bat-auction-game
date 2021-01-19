@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const ImageInfoContainer = styled.div<{ width?: number; height?: number }>`
+const ImageCaroselContainer = styled.div<{ width?: number; height?: number }>`
   overflow: hidden;
   background-color: #000;
   width: ${(props) => props.width}px;
@@ -43,9 +43,10 @@ const IMG_HEIGHT = 400;
 
 type ListingImagesProps = {
   images: string[];
+  _id: string;
 };
 
-export const ListingImages: React.FC<ListingImagesProps> = ({ images }) => {
+export const ListingImages: React.FC<ListingImagesProps> = ({ images, _id }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [movement, setMovement] = useState(0);
   const [transitionDuration, setTransitionDuration] = useState(`0s`);
@@ -54,6 +55,11 @@ export const ListingImages: React.FC<ListingImagesProps> = ({ images }) => {
   const maxLength = images.length - 1;
   let transitionTimeOut: ReturnType<typeof setTimeout>;
   let wheelTimeOut: ReturnType<typeof setTimeout>;
+
+  useEffect(()=> {
+    setCurrentIndex(0)
+    setMovement(0)
+  }, [_id])
 
   const handleWheelChange = (e: any) => {
     clearTimeout(wheelTimeOut);
@@ -129,7 +135,7 @@ export const ListingImages: React.FC<ListingImagesProps> = ({ images }) => {
   });
 
   return (
-    <ImageInfoContainer
+    <ImageCaroselContainer
       onWheel={handleWheelChange}
       width={IMG_WIDTH}
       height={IMG_HEIGHT}
@@ -174,6 +180,6 @@ export const ListingImages: React.FC<ListingImagesProps> = ({ images }) => {
           ←
         </MoveButton>
       )}
-    </ImageInfoContainer>
+    </ImageCaroselContainer>
   );
 };

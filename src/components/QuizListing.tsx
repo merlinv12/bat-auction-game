@@ -1,18 +1,14 @@
+import { totalmem } from "os";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { ListingImages } from './ListingImages'
+import { ListingInfo } from './ListingInfo';
 
-const RoundsHeader = styled.h3`
-  color: green;
-  min-width: 0;
-  min-height: auto;
-  flex: 0 1 auto;
-`;
 
 const QuizContainer = styled.div`
   width: 80vw;
-  min-width: 400px;
-  min-height: 800px;
+  /* min-width: 700px;
+  min-height: 500px; */
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -20,10 +16,22 @@ const QuizContainer = styled.div`
   margin-right: auto;
   `;
   
+const RoundsHeader = styled.h3`
+  color: green;
+  min-width: 0;
+  min-height: auto;
+  flex: 0 1 auto;
+`;
+
 const ListingContainer = styled.div`
   box-shadow: 0 0 0 1px rgb(0 0 0/.05), 0 4px 16px rgb(0 0 0/.1);
   border-radius: 24px;
-  padding: 30px;
+`;
+
+const ListingImagesInfoContainer = styled.div`
+  padding: 20px;
+  display: flex;
+  flex-flow: row nowrap;
 `;
 
 
@@ -43,18 +51,15 @@ export const QuizListing: React.FC<QuizListingProps> = ({
   const [guessSubmited, setGuessSubmitted] = useState(false);
   const [guessValue, setGuessValue] = useState(0);
   const {
-    date,
     _id,
-    images: { main, extra },
-    location: { city, zip },
-    listingUrl,
     price,
+    listingUrl,
     title,
+    images: { main, extra },
   } = listing;
 
   // Resets the Guessing State when a new listing is loaded.
   useEffect(() => {
-    console.log("Next Auction...");
     setGuessValue(0);
     setGuessSubmitted(false);
   }, [_id]);
@@ -67,18 +72,12 @@ export const QuizListing: React.FC<QuizListingProps> = ({
         {`Round: ${rounds.current} / ${rounds.total}`}
       </RoundsHeader>
       <ListingContainer>
-        <h2>{title}</h2>
-        <div>
-          <div>
-            <b>{`Sold On: ${date}`}</b>
-          </div>
-          <div>
-            <b>
-              {`Location: ${city}, ${zip}`}
-            </b>
-          </div>
-        </div>
-        <ListingImages images={images} />
+        <h2 style={{textAlign: 'center', marginBottom: 0}}>{title}</h2>
+        <ListingImagesInfoContainer>
+          <ListingImages images={images} _id={_id}/>
+          <ListingInfo listing={listing}/>
+        </ListingImagesInfoContainer>
+      </ListingContainer>
 
         {guessSubmited ? (
           <div>
@@ -107,8 +106,6 @@ export const QuizListing: React.FC<QuizListingProps> = ({
             <button onClick={() => setGuessSubmitted(true)}>Guess</button>
           </React.Fragment>
         )}
-
-      </ListingContainer>
     </QuizContainer>
   );
 };
