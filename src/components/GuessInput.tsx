@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import gavel from "../assets/gavel.svg";
-import gavelDown from "../assets/gavel-down-hover.svg"
+import gavelDown from "../assets/gavel-down-hover.svg";
 
 const GuessInputContainer = styled.div`
   display: flex;
   position: relative;
   height: 50px;
+  margin-top: 20px;
   place-content: center;
 `;
 
@@ -24,13 +25,22 @@ const StyledGuessInput = styled.input`
   height: 50px;
   box-sizing: border-box;
   outline: none !important;
+
+  // Removes Incrementing arrows in inputbox
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  ::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 const GuessButton = styled.button`
   width: 46px;
   height: 100%;
-  background: url(${gavel}) center center / 30px 30px no-repeat
-    rgb(0, 0, 0);
+  background: url(${gavel}) center center / 30px 30px no-repeat rgb(0, 0, 0);
   display: inline-block;
   border: none;
   position: relative;
@@ -39,31 +49,40 @@ const GuessButton = styled.button`
   padding: 0px;
   &:hover {
     background: url(${gavelDown}) center center / 30px 30px no-repeat
-    rgb(0, 0, 0);
-
-}
+      rgb(0, 0, 0);
+  }
 `;
 
 type GuessInputProps = {
-    guess: number;
-    setGuessValue: any;
-    setGuessSubmitted: any;
-}
-export const GuessInput: React.FC<GuessInputProps> = ({ guess, setGuessSubmitted, setGuessValue}) => {
-    const handleGuessChange = (e:any) => {
-        let value = e.target.value;
-        setGuessValue(parseInt(value))
-    }
+  guess: number;
+  setGuessValue: any;
+  setGuessSubmitted: any;
+};
+export const GuessInput: React.FC<GuessInputProps> = ({
+  guess,
+  setGuessSubmitted,
+  setGuessValue,
+}) => {
+  const handleGuessChange = (e: any) => {
+    let value = e.target.value;
+    setGuessValue(parseInt(value));
+  };
+
+  const handleGuessSubmit = (e: any) => {
+      if (guess === 0) return
+      setGuessSubmitted(true)
+  }
 
   return (
     <GuessInputContainer>
       <StyledGuessInput
-        type='string'
+        type='number'
         placeholder='$0'
+        min='1'
         required
         onChange={handleGuessChange}
       ></StyledGuessInput>
-      <GuessButton onClick={() => setGuessSubmitted(true) }></GuessButton>
+      <GuessButton onClick={handleGuessSubmit}></GuessButton>
     </GuessInputContainer>
   );
 };

@@ -20,6 +20,6 @@ const QuizSummaryItem: React.FC<QuizSummaryItemProps> = ({ listing }) => (
     <div>
         <div>{listing.title}</div>
         <div>{listing.price}</div>
-        <div><a href={listing.listingUrl}>Link to listing</a></div>
+        <div><a href={listing.url}>Link to listing</a></div>
     </div>
 )

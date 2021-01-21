@@ -43,7 +43,7 @@ export const ListingInfo: React.FC<ListingInfoProps> = ({listing}) => {
         date,
         _id,
         location: { city, state, zip },
-        listingUrl,
+        url: listingUrl,
         price,
         additionalInfo,
         title,

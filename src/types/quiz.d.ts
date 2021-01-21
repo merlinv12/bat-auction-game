@@ -11,7 +11,7 @@ interface Listing {
     additionalInfo: string[];
     _id: string;
     order: number;
-    listingUrl: string;
+    url: string;
 }
 
 interface ListingLocation {
