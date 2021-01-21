@@ -6,13 +6,17 @@ import { QuizSummary } from "./QuizSummary";
 
 type QuizMainProps = {
   quizLength: number;
+  setGameStarted: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const QuizMain: React.FC<QuizMainProps> = ({ quizLength }) => {
-  const [activeListingIdx, setActiveListingIdx] = useState(0);
-  const [displaySummary, setDisplaySummary] = useState(false);
+export const QuizMain: React.FC<QuizMainProps> = ({
+  quizLength,
+  setGameStarted,
+}) => {
+  const [activeListingIdx, setActiveListingIdx] = useState<number>(0);
+  const [displaySummary, setDisplaySummary] = useState<boolean>(false);
   const [listings, setListings] = useState<Listing[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     getQuizListings(quizLength);
@@ -37,7 +41,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({ quizLength }) => {
     setLoading(true);
     try {
       const response: AxiosResponse<Listing[]> = await getListings(limit);
-      const auctionListings: Listing[] = response.data
+      const auctionListings: Listing[] = response.data;
       auctionListings.length > 0 && setListings(auctionListings);
       setLoading(false);
     } catch (err) {
@@ -58,7 +62,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({ quizLength }) => {
     <div>
       {!loading ? (
         displaySummary ? (
-           <QuizSummary listings={listings} />
+          <QuizSummary listings={listings} setGameStarted={setGameStarted} />
         ) : (
           <QuizListing
             listing={listings[activeListingIdx]}

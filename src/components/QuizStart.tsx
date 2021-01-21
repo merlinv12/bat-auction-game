@@ -15,7 +15,7 @@ const FlexContainer = styled.div`
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
-  box-shadow: 0 0 0 1px rgb(0 0 0/.05), 0 4px 16px rgb(0 0 0/.1);
+  box-shadow: 0 0 0 1px rgb(0 0 0/0.05), 0 4px 16px rgb(0 0 0/0.1);
   border-radius: 24px;
   padding: 20px;
   width: 600px;
@@ -38,7 +38,7 @@ export const StyledButton = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
-`
+`;
 const StartQuiz: React.FC = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [quizLength, setQuizLength] = useState(3);
@@ -67,10 +67,12 @@ const StartQuiz: React.FC = () => {
               />
             </span>
           </FlexRow>
-          <StyledButton onClick={() => setGameStarted(true)}>Start</StyledButton>
+          <StyledButton onClick={() => setGameStarted(true)}>
+            Start
+          </StyledButton>
         </FlexContainer>
       ) : (
-          <QuizMain quizLength={quizLength} />
+        <QuizMain quizLength={quizLength} setGameStarted={setGameStarted} />
       )}
     </FullScreenContainer>
   );

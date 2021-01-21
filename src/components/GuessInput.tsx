@@ -69,9 +69,9 @@ export const GuessInput: React.FC<GuessInputProps> = ({
   };
 
   const handleGuessSubmit = (e: any) => {
-      if (guess === 0) return
-      setGuessSubmitted(true)
-  }
+    if (guess === 0) return;
+    setGuessSubmitted(true);
+  };
 
   return (
     <GuessInputContainer>

@@ -24,7 +24,7 @@ const RoundsHeader = styled.h3`
   flex: 0 1 auto;
 `;
 
-const ListingContainer = styled.div`
+export const RoundShadowBorder = styled.div`
   box-shadow: 0 0 0 1px rgb(0 0 0/0.05), 0 4px 16px rgb(0 0 0/0.1);
   border-radius: 24px;
 `;
@@ -76,13 +76,13 @@ export const QuizListing: React.FC<QuizListingProps> = ({
       <RoundsHeader>
         {`Round: ${rounds.current} / ${rounds.total}`}
       </RoundsHeader>
-      <ListingContainer>
+      <RoundShadowBorder>
         <h2 style={{ textAlign: "center", marginBottom: 0 }}>{title}</h2>
         <ListingImagesInfoContainer>
           <ListingImages images={images} _id={_id} />
           <ListingInfo listing={listing} />
         </ListingImagesInfoContainer>
-      </ListingContainer>
+      </RoundShadowBorder>
 
       {guessSubmited ? (
         <NextListingContainer>

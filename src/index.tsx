@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <h1 style={{ textAlign: "center"}}>Bring A Trailer Auction Quiz</h1>
+    <h1 style={{ textAlign: "center"}}>The Car Auction Game</h1>
     <QuizStart />
   </React.StrictMode>,
   document.getElementById('root')
