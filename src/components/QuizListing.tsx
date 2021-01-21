@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { ListingImages } from './ListingImages'
 import { ListingInfo } from './ListingInfo';
+import { GuessInput } from './GuessInput';
 
 
 const QuizContainer = styled.div`
@@ -103,6 +104,7 @@ export const QuizListing: React.FC<QuizListingProps> = ({
               min='1'
               onChange={(e) => setGuessValue(parseInt(e.target.value))}
             />
+            <GuessInput guess={guessValue} setGuessValue={setGuessValue} setGuessSubmitted={setGuessSubmitted}></GuessInput>
             <button onClick={() => setGuessSubmitted(true)}>Guess</button>
           </React.Fragment>
         )}
