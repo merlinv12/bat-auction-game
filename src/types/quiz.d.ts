@@ -29,3 +29,8 @@ interface Rounds {
     current: number;
     total: number;
 }
+
+interface UserGuess {
+    _id: string;
+    guessValue: number;
+}

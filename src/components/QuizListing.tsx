@@ -1,4 +1,3 @@
-import { totalmem } from "os";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { ListingImages } from "./ListingImages";
@@ -45,16 +44,18 @@ type QuizListingProps = {
   rounds: Rounds;
   nextAuction: () => void;
   showSummary: () => void;
+  handleUserGuess: (userGuess: UserGuess) => void;
 };
 
 export const QuizListing: React.FC<QuizListingProps> = ({
   listing,
+  handleUserGuess,
   nextAuction,
   rounds,
   showSummary,
 }) => {
-  const [guessSubmited, setGuessSubmitted] = useState(false);
-  const [guessValue, setGuessValue] = useState(0);
+  const [guessSubmited, setGuessSubmitted] = useState<boolean>(false);
+  const [guessValue, setGuessValue] = useState<number>(0);
   const {
     _id,
     price,
@@ -68,6 +69,13 @@ export const QuizListing: React.FC<QuizListingProps> = ({
     setGuessValue(0);
     setGuessSubmitted(false);
   }, [_id]);
+
+  const handleGuessSubmit = (): void => {
+    if (guessValue === 0) return;
+    let newUserGuess = { _id, guessValue };
+    handleUserGuess(newUserGuess);
+    setGuessSubmitted(true);
+  };
 
   let images = [main, ...extra];
 
@@ -87,9 +95,12 @@ export const QuizListing: React.FC<QuizListingProps> = ({
       {guessSubmited ? (
         <NextListingContainer>
           <p>
-            {`Actual Price: $${price}, `}
+            {`Actual Price: $${price}`}
+            <br></br>
+            {`Your guess: $${guessValue}`}
+            <br></br>
             <a href={listingUrl} target='_blank' rel='noreferrer'>
-              Click here to see the listing
+              View Auction
             </a>
           </p>
           {rounds.current === rounds.total ? (
@@ -103,7 +114,7 @@ export const QuizListing: React.FC<QuizListingProps> = ({
           <GuessInput
             guess={guessValue}
             setGuessValue={setGuessValue}
-            setGuessSubmitted={setGuessSubmitted}
+            handleGuessSubmit={handleGuessSubmit}
           ></GuessInput>
         </React.Fragment>
       )}

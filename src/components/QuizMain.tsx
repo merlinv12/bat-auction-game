@@ -17,6 +17,7 @@ export const QuizMain: React.FC<QuizMainProps> = ({
   const [displaySummary, setDisplaySummary] = useState<boolean>(false);
   const [listings, setListings] = useState<Listing[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [userGuesses, setUserGuesses] = useState<UserGuess[]>([])
 
   useEffect(() => {
     getQuizListings(quizLength);
@@ -58,17 +59,22 @@ export const QuizMain: React.FC<QuizMainProps> = ({
     activeListingIdx + 1 === listings.length && setDisplaySummary(true);
   };
 
+  const handleUserGuess = (newUserGuess: UserGuess): void => {
+    setUserGuesses([...userGuesses, newUserGuess])
+  }
+
   return (
     <div>
       {!loading ? (
         displaySummary ? (
-          <QuizSummary listings={listings} setGameStarted={setGameStarted} />
+          <QuizSummary listings={listings} setGameStarted={setGameStarted} userGuesses={userGuesses}/>
         ) : (
           <QuizListing
             listing={listings[activeListingIdx]}
             rounds={{ current: activeListingIdx + 1, total: listings.length }}
             nextAuction={handleNextAuction}
             showSummary={handleDisplaySummary}
+            handleUserGuess={handleUserGuess}
           />
         )
       ) : (

@@ -55,22 +55,17 @@ const GuessButton = styled.button`
 
 type GuessInputProps = {
   guess: number;
-  setGuessValue: any;
-  setGuessSubmitted: any;
+  setGuessValue: React.Dispatch<React.SetStateAction<number>>;
+  handleGuessSubmit: () => void;
 };
 export const GuessInput: React.FC<GuessInputProps> = ({
   guess,
-  setGuessSubmitted,
+  handleGuessSubmit,
   setGuessValue,
 }) => {
   const handleGuessChange = (e: any) => {
     let value = e.target.value;
     setGuessValue(parseInt(value));
-  };
-
-  const handleGuessSubmit = (e: any) => {
-    if (guess === 0) return;
-    setGuessSubmitted(true);
   };
 
   return (
